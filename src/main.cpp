@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
   }
 
   vector<Task> tasks = getTasks(file);
+  sortTasks(tasks);
   for (auto task : tasks) {
     cout << task.start << " " << task.end << endl;
   }

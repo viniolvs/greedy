@@ -9,4 +9,6 @@ typedef struct {
 
 std::vector<Task> getTasks(FILE *file);
 
+void sortTasks(std::vector<Task> &tasks);
+
 #endif // !GREEDY_HPP

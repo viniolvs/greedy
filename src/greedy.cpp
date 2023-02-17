@@ -1,5 +1,6 @@
 #include "greedy.hpp"
 #include <cstdio>
+#include <iostream>
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -14,23 +15,36 @@ vector<Task> getTasks(FILE *file) {
   while (!feof(file) && c != '\n') {
     Task task;
     fread(&c, sizeof(char), 1, file);
-    if (c != ' ') {
+    if (isdigit(c)) {
       number += c;
-    } else {
+    } else if (number != "") {
       task.start = stoi(number);
       tasks.push_back(task);
       number = "";
     }
   }
+  number = "";
   while (!feof(file)) {
     fread(&c, sizeof(char), 1, file);
-    if (c != ' ') {
+    if (isdigit(c)) {
       number += c;
-    } else {
-      tasks.at(i).end = stoi(number);
+    } else if (number != "") {
+      tasks[i].end = stoi(number);
       i++;
       number = "";
     }
   }
   return tasks;
+}
+
+void sortTasks(vector<Task> &tasks) {
+  for (unsigned long i = 0; i < tasks.size(); i++) {
+    for (unsigned long j = 0; j < tasks.size() - 1; j++) {
+      if (tasks.at(j).start > tasks.at(j + 1).start) {
+        Task temp = tasks.at(j);
+        tasks.at(j) = tasks.at(j + 1);
+        tasks.at(j + 1) = temp;
+      }
+    }
+  }
 }
