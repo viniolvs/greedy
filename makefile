@@ -10,7 +10,7 @@
 TARGET     = greedy.x
 
 CXX        = clang++
-CXXFLAGS   = -std=c++11 -stdlib=libc++ \
+CXXFLAGS   =  -g -std=c++11 -stdlib=libc++ \
               -Weverything -Wall -Wextra -Wpointer-arith -Wcast-qual \
               -Wno-missing-braces -Wempty-body -Wno-error=uninitialized \
               -Wno-error=deprecated-declarations \
