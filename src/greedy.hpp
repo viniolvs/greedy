@@ -1,14 +1,27 @@
 #ifndef GREEDY_HPP
 #define GREEDY_HPP
+#include <list>
 #include <vector>
 
-typedef struct {
+typedef struct Task {
   int start;
   int end;
+  int machine;
 } Task;
+
+typedef std::vector<Task> Machine;
 
 std::vector<Task> getTasks(FILE *file);
 
 void sortTasks(std::vector<Task> &tasks);
 
-#endif // !GREEDY_HPP
+void sortTasks_end(std::vector<Task> &tasks);
+
+unsigned greedy(std::vector<Task> &tasks);
+
+std::vector<Machine> greedy2(std::vector<Task> &tasks);
+
+void printMachines(std::vector<Machine> &machines);
+
+void printTasks(std::vector<Task> &tasks, unsigned m);
+#endif
