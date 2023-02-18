@@ -68,9 +68,15 @@ vector<Machine> greedy2(std::vector<Task> &tasks) {
       // se não existir mais tarefas para a máquina, sai do loop
       if (machines[i][j - 1].end > tasks.end()->start)
         break;
-
       // busca a melhor tarefa para a máquina na lista de tarefas
-      best = seekBestTask(tasks, machines[i][j - 1].end);
+      if(tasks.size() > 1)
+        best = seekBestTask(tasks, machines[i][j - 1].end);
+      else{
+        machines[i].push_back(tasks[0]);
+        tasks.erase(tasks.begin());
+      }
+      if (best == -1)
+        break;
       // insere a melhor tarefa na máquina
       machines[i].push_back(tasks[static_cast<unsigned long>(best)]);
       // remove a tarefa da lista de tarefas
