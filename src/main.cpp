@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
       cout << "Número de Máquinas: " << m << endl;
     } else if (mode == "2") {
       machines = greedy2(tasks);
-      printMachines(machines);
+      /* printMachines(machines); */
       cout << "Número de Máquinas: " << machines.size() << endl;
     } else {
       cerr << "Modo inválido!" << endl << "<modo> start | 2 " << endl;
