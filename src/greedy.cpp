@@ -1,4 +1,5 @@
 #include "greedy.hpp"
+#include <cstdio>
 #include <iostream>
 #include <vector>
 
@@ -69,9 +70,9 @@ vector<Machine> greedy2(std::vector<Task> &tasks) {
       if (machines[i][j - 1].end > tasks.end()->start)
         break;
       // busca a melhor tarefa para a máquina na lista de tarefas
-      if(tasks.size() > 1)
+      if (tasks.size() > 1)
         best = seekBestTask(tasks, machines[i][j - 1].end);
-      else{
+      else {
         machines[i].push_back(tasks[0]);
         tasks.erase(tasks.begin());
       }

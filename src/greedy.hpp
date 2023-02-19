@@ -1,5 +1,6 @@
 #ifndef GREEDY_HPP
 #define GREEDY_HPP
+#include <cstdio>
 #include <list>
 #include <vector>
 

@@ -1,4 +1,5 @@
 #include "greedy.hpp"
+#include <cstdio>
 #include <iostream>
 #include <time.h>
 
