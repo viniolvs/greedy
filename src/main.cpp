@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     /* for (unsigned i = 0; i < tasks.size(); i++) */
     /*   cout << tasks[i].start << " " << tasks[i].end << endl; */
 
-    if (mode == "start") {
+    if (mode == "1") {
       m = greedy(tasks);
       // printTasks(tasks, m);
       // cout << "Número de Máquinas: " << m << endl;
@@ -44,12 +44,11 @@ int main(int argc, char *argv[]) {
       // cout << "Número de Máquinas: " << machines.size() << endl;
       cout << machines.size(); // saida script
     } else {
-      cerr << "Modo inválido!" << endl << "<modo> start | 2 " << endl;
+      cerr << "Modo inválido!" << endl << "<modo> 1 | 2 " << endl;
       exit(EXIT_FAILURE);
     }
   } else {
-    cerr << "./greedy.x <entrada> <modo>" << endl
-         << "<modo> start | 2 " << endl;
+    cerr << "./greedy.x <entrada> <modo>" << endl << "<modo> 1 | 2 " << endl;
     exit(EXIT_FAILURE);
   }
   end = clock();

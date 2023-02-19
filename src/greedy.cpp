@@ -5,28 +5,37 @@
 
 using namespace std;
 
-static int seekIdleMachine(vector<Task> &machines, int time) {
-  for (unsigned long i = 0; i < machines.size(); i++) {
-    if (machines[i].end == time) {
+// procura uma tarefa que já terminou
+static int seekIdleMachine(vector<Task> &running, int time) {
+  for (unsigned long i = 0; i < running.size(); i++) {
+    if (running[i].end == time) {
       return static_cast<int>(i);
     }
   }
   return -1;
 }
 
+// Solução gulosa 1
 unsigned greedy(std::vector<Task> &tasks) {
-  vector<Task> machines;
+  // vetor com as tarefas em execução
+  vector<Task> running;
+  // número de máquinas
   unsigned m = 0;
   int time = 0;
   for (unsigned long i = 0; i < tasks.size(); i++) {
+    // tempo atual = início da tarefa atual
     time = tasks[i].start;
-    int idle = seekIdleMachine(machines, time);
+    // procura uma tarefa que já terminou
+    int idle = seekIdleMachine(running, time);
+    // se existir uma tarefa que já terminou, a tarefa atual é executada nessa
     if (idle != -1) {
       tasks[i].machine = idle;
-      machines[static_cast<unsigned long>(idle)] = tasks[i];
-    } else {
-      tasks[i].machine = static_cast<int>(machines.size());
-      machines.push_back(tasks[i]);
+      running[static_cast<unsigned long>(idle)] = tasks[i];
+    }
+    // se não existir uma tarefa que já terminou, uma nova máquina é criada
+    else {
+      tasks[i].machine = static_cast<int>(running.size());
+      running.push_back(tasks[i]);
       m++;
     }
   }
@@ -46,44 +55,45 @@ static int seekBestTask(vector<Task> &tasks, int end) {
   for (unsigned long i = 1; i < tasks.size(); i++) {
     if (diff_start_end(tasks[i].start, end) == 0) {
       return static_cast<int>(i);
-    } else if ((aux < 0) || ((diff_start_end(tasks[i].start, end) >= 0) &&
-                             (diff_start_end(tasks[i].start, end) < aux))) {
+    } else if ((aux < 0) || (best < 0) ||
+               ((diff_start_end(tasks[i].start, end) >= 0) &&
+                (diff_start_end(tasks[i].start, end) < aux))) {
       best = static_cast<int>(i);
     }
   }
   return best;
 }
 
+// Solução gulosa 2
 vector<Machine> greedy2(std::vector<Task> &tasks) {
   vector<Machine> machines;
-  int best = 0;
-  unsigned i = 0;
-  while (tasks.size() > 0) {
-    // insere a primeira tarefa na nova máquina
+  int best = -1;
+  for (unsigned i = 0; tasks.size() > 0; i++) {
+    // insere a primeira tarefa na nova máquina e a remove da lista
     machines.push_back(Machine());
     machines[i].push_back(tasks[0]);
-    // remove a tarefa da lista de tarefas
     tasks.erase(tasks.begin());
-    // executa enquanto existe uma tarefa que caiba na máquina
-    for (unsigned long j = 1;; j++) {
+
+    for (unsigned long j = 1; tasks.size() > 0; j++) {
       // se não existir mais tarefas para a máquina, sai do loop
       if (machines[i][j - 1].end > tasks.end()->start)
         break;
-      // busca a melhor tarefa para a máquina na lista de tarefas
-      if (tasks.size() > 1)
-        best = seekBestTask(tasks, machines[i][j - 1].end);
-      else {
+      // caso a tarefa caiba na máquina e seja a última da lista de tarefas
+      else if (tasks.size() == 1) {
         machines[i].push_back(tasks[0]);
         tasks.erase(tasks.begin());
-      }
-      if (best == -1)
         break;
-      // insere a melhor tarefa na máquina
-      machines[i].push_back(tasks[static_cast<unsigned long>(best)]);
-      // remove a tarefa da lista de tarefas
-      tasks.erase(tasks.begin() + best);
+      }
+      // caso a tarefa caiba na máquina e não seja a última da lista de tarefas
+      else {
+        // busca a melhor tarefa para a máquina na lista de tarefas
+        best = seekBestTask(tasks, machines[i][j - 1].end);
+        // insere a melhor tarefa na máquina
+        machines[i].push_back(tasks[static_cast<unsigned long>(best)]);
+        // remove a tarefa da lista de tarefas
+        tasks.erase(tasks.begin() + best);
+      }
     }
-    i++;
   }
   return machines;
 }
