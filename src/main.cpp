@@ -35,12 +35,14 @@ int main(int argc, char *argv[]) {
 
     if (mode == "start") {
       m = greedy(tasks);
-      /* printTasks(tasks, m); */
-      cout << "Número de Máquinas: " << m << endl;
+      // printTasks(tasks, m);
+      // cout << "Número de Máquinas: " << m << endl;
+      cout << m; // saida script
     } else if (mode == "2") {
       machines = greedy2(tasks);
-      /* printMachines(machines); */
-      cout << "Número de Máquinas: " << machines.size() << endl;
+      // printMachines(machines);
+      // cout << "Número de Máquinas: " << machines.size() << endl;
+      cout << machines.size(); // saida script
     } else {
       cerr << "Modo inválido!" << endl << "<modo> start | 2 " << endl;
       exit(EXIT_FAILURE);
@@ -51,10 +53,8 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
   end = clock();
-
-  cout << "Tempo: "
-       << ((static_cast<double>(end - start) + 0.0) / CLOCKS_PER_SEC) << "s"
-       << endl;
-
+  double time = ((static_cast<double>(end - start) + 0.0) / CLOCKS_PER_SEC);
+  // cout << "Tempo: " << time << endl;
+  cout << "," << time; // saida script
   return 0;
 }
