@@ -27,15 +27,18 @@ int main(int argc, char *argv[]) {
 
   start = clock();
   if (argc == 3) {
+    mergeSortTasks(tasks, 0, tasks.size() - 1);
+    // print tasks
+    /* for (unsigned i = 0; i < tasks.size(); i++) */
+    /*   cout << tasks[i].start << " " << tasks[i].end << endl; */
+
     if (mode == "start") {
-      sortTasks(tasks);
       m = greedy(tasks);
       /* printTasks(tasks, m); */
       cout << "Número de Máquinas: " << m << endl;
     } else if (mode == "2") {
-      sortTasks(tasks);
       machines = greedy2(tasks);
-      /* printMachines(machines); */
+      printMachines(machines);
       cout << "Número de Máquinas: " << machines.size() << endl;
     } else {
       cerr << "Modo inválido!" << endl << "<modo> start | 2 " << endl;
