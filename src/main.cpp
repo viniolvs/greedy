@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 
   FILE *file = fopen(argv[1], "rb+");
   if (!file) {
-    cerr << "Falha ao abrir arquivo de entrada!" << endl;
+    cerr << "Falha ao abrir arquivo " << string(argv[1]) << endl;
     exit(EXIT_FAILURE);
   }
 
