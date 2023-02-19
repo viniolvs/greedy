@@ -44,8 +44,9 @@ for ((i = 300; i <= 30000; i*=100))
   done
 
 echo "Executando para 350000 aulas"
-echo -n "350000,"  >> saida_350000.csv
+echo -n "350000,"  >> saida_$MODO.csv
 ./greedy.x $DIR/Aula350000.txt $MODO >> saida_$MODO.csv
+echo >> saida_$MODO.csv
 
 for ((i = 50; i <= 500000; i*=10))
   do
