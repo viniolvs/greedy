@@ -46,15 +46,3 @@ void sortTasks(vector<Task> &tasks) {
     }
   }
 }
-
-void sortTasks_end(vector<Task> &tasks) {
-  for (unsigned long i = 0; i < tasks.size(); i++) {
-    for (unsigned long j = 0; j < tasks.size() - 1; j++) {
-      if (tasks.at(j).end > tasks.at(j + 1).end) {
-        Task temp = tasks.at(j);
-        tasks.at(j) = tasks.at(j + 1);
-        tasks.at(j + 1) = temp;
-      }
-    }
-  }
-}

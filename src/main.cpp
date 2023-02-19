@@ -27,12 +27,8 @@ int main(int argc, char *argv[]) {
 
   start = clock();
   if (argc == 3) {
-    if (mode == "start" || mode == "end") {
-      if (mode == "start") {
-        sortTasks(tasks);
-      } else if (mode == "end") {
-        sortTasks_end(tasks);
-      }
+    if (mode == "start") {
+      sortTasks(tasks);
       m = greedy(tasks);
       /* printTasks(tasks, m); */
       cout << "Número de Máquinas: " << m << endl;
@@ -42,13 +38,12 @@ int main(int argc, char *argv[]) {
       /* printMachines(machines); */
       cout << "Número de Máquinas: " << machines.size() << endl;
     } else {
-      cerr << "Modo inválido!" << endl << "<modo> start | end | 2 " << endl;
+      cerr << "Modo inválido!" << endl << "<modo> start | 2 " << endl;
       exit(EXIT_FAILURE);
     }
   } else {
     cerr << "./greedy.x <entrada> <modo>" << endl
-         << "<modo> start | end | 2 " << endl
-         << "<print>opcional" << endl;
+         << "<modo> start | 2 " << endl;
     exit(EXIT_FAILURE);
   }
   end = clock();

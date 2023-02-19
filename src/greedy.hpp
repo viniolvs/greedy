@@ -15,8 +15,6 @@ std::vector<Task> getTasks(FILE *file);
 
 void sortTasks(std::vector<Task> &tasks);
 
-void sortTasks_end(std::vector<Task> &tasks);
-
 unsigned greedy(std::vector<Task> &tasks);
 
 std::vector<Machine> greedy2(std::vector<Task> &tasks);
