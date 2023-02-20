@@ -21,9 +21,11 @@ void mergeSortTasks(std::vector<Task> &tasks, unsigned long start,
 
 unsigned greedy(std::vector<Task> &tasks);
 
-std::vector<Machine> greedy2(std::vector<Task> &tasks);
+unsigned greedy_validate(std::vector<Task> &tasks);
 
-void printMachines(std::vector<Machine> &machines);
+unsigned greedy2(std::vector<Task> &tasks);
+
+unsigned greedy2_validate(std::vector<Task> &tasks);
 
 void printTasks(std::vector<Task> &tasks, unsigned m);
 #endif

@@ -12,6 +12,9 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
   string mode = argv[2];
+  string validate = "";
+  if (argc == 4)
+    validate = argv[3];
 
   FILE *file = fopen(argv[1], "rb+");
   if (!file) {
@@ -27,22 +30,23 @@ int main(int argc, char *argv[]) {
   vector<Machine> machines;
 
   start = clock();
-  if (argc == 3) {
+  if (argc == 3 || argc == 4) {
     mergeSortTasks(tasks, 0, tasks.size() - 1);
-    // print tasks
-    /* for (unsigned i = 0; i < tasks.size(); i++) */
-    /*   cout << tasks[i].start << " " << tasks[i].end << endl; */
 
     if (mode == "1") {
-      m = greedy(tasks);
-      // printTasks(tasks, m);
-      // cout << "Número de Máquinas: " << m << endl;
-      cout << m; // saida script
+      if (validate == "v")
+        m = greedy_validate(tasks); // função que valida a solução
+      else {
+        m = greedy(tasks);
+        cout << m; // saida script
+      }
     } else if (mode == "2") {
-      machines = greedy2(tasks);
-      // printMachines(machines);
-      // cout << "Número de Máquinas: " << machines.size() << endl;
-      cout << machines.size(); // saida script
+      if (validate == "v")
+        m = greedy2_validate(tasks); // função que valida a solução
+      else {
+        m = greedy2(tasks); // apenas retorna quantas máquinas foram usadas
+        cout << m;          // saida script
+      }
     } else {
       cerr << "Modo inválido!" << endl << "<modo> 1 | 2 " << endl;
       exit(EXIT_FAILURE);
@@ -52,8 +56,11 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
   end = clock();
+
   double time = ((static_cast<double>(end - start) + 0.0) / CLOCKS_PER_SEC);
-  // cout << "Tempo: " << time << endl;
-  cout << "," << time; // saida script
+  if (validate == "v")
+    cout << "Tempo: " << time << endl;
+  else
+    cout << "," << time; // saida script
   return 0;
 }
