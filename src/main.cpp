@@ -32,7 +32,6 @@ int main(int argc, char *argv[]) {
   start = clock();
   if (argc == 3 || argc == 4) {
     mergeSortTasks(tasks, 0, tasks.size() - 1);
-
     if (mode == "1") {
       if (validate == "v")
         m = greedy_validate(tasks); // função que valida a solução
@@ -41,11 +40,12 @@ int main(int argc, char *argv[]) {
         cout << m; // saida script
       }
     } else if (mode == "2") {
+      unsigned limit = 4;
       if (validate == "v")
-        m = greedy2_validate(tasks); // função que valida a solução
+        m = greedy2_validate(tasks, limit); // função que valida a solução
       else {
-        m = greedy2(tasks); // apenas retorna quantas máquinas foram usadas
-        cout << m;          // saida script
+        m = greedy2(tasks, limit);
+        cout << m; // saida script
       }
     } else {
       cerr << "Modo inválido!" << endl << "<modo> 1 | 2 " << endl;

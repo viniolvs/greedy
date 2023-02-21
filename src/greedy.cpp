@@ -87,7 +87,8 @@ static int seekBestTask(vector<Task> &tasks, int end) {
 }
 
 // Solução gulosa 2
-unsigned greedy2(std::vector<Task> &tasks) {
+// limit define o número máximo de tarefas que uma máquina pode executar
+unsigned greedy2(std::vector<Task> &tasks, unsigned limit) {
   // vetor auxiliar para exibir qual máquina executou qual tarefa
   int best = -1;
   unsigned i = 0;
@@ -99,7 +100,7 @@ unsigned greedy2(std::vector<Task> &tasks) {
 
     for (unsigned long j = 1; tasks.size() > 0; j++) {
       // se não existir mais tarefas para a máquina, sai do loop
-      if (machine[j - 1].end > tasks.end()->start)
+      if (j >= (limit - 1) || machine[j - 1].end > tasks.end()->start)
         break;
       // caso a tarefa caiba na máquina e seja a última da lista de tarefas
       else if (tasks.size() == 1) {
@@ -122,7 +123,7 @@ unsigned greedy2(std::vector<Task> &tasks) {
 }
 
 // modifica o vetor de tarefas para exibir qual máquina executou qual tarefa
-unsigned greedy2_validate(std::vector<Task> &tasks) {
+unsigned greedy2_validate(std::vector<Task> &tasks, unsigned limit) {
   // vetor auxiliar
   vector<Task> aux;
   copy(tasks.begin(), tasks.end(), back_inserter(aux));
@@ -141,8 +142,9 @@ unsigned greedy2_validate(std::vector<Task> &tasks) {
     aux.erase(aux.begin());
 
     for (unsigned long j = 1; aux.size() > 0; j++) {
-      // se não existir mais tarefas para a máquina, sai do loop
-      if (machine[j - 1].end > aux.end()->start)
+      // se não existir mais tarefas para a máquina ou se a maquina
+      // atingir o limite de tarefas sai do loop
+      if (j >= (limit - 1) || machine[j - 1].end > aux.end()->start)
         break;
       // caso a tarefa caiba na máquina e seja a última da lista de tarefas
       else if (aux.size() == 1) {
@@ -171,12 +173,16 @@ unsigned greedy2_validate(std::vector<Task> &tasks) {
 }
 
 void printTasks(vector<Task> &tasks, unsigned m) {
+  std::vector<int> count_tasks(m, 0);
   for (unsigned long i = 0; i < m; i++) {
     std::cout << "Máquina " << i << ": ";
     for (unsigned long j = 0; j < tasks.size(); j++) {
-      if (tasks[j].machine == static_cast<int>(i))
+      if (tasks[j].machine == static_cast<int>(i)) {
         std::cout << tasks[j].start << " " << tasks[j].end << " | ";
+        count_tasks[i]++;
+      }
     }
-    std::cout << std::endl;
+    std::cout << "Tarefas executadas na máquina " << i << ": " << count_tasks[i]
+              << std::endl;
   }
 }

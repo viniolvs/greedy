@@ -23,9 +23,9 @@ unsigned greedy(std::vector<Task> &tasks);
 
 unsigned greedy_validate(std::vector<Task> &tasks);
 
-unsigned greedy2(std::vector<Task> &tasks);
+unsigned greedy2(std::vector<Task> &tasks, unsigned limit);
 
-unsigned greedy2_validate(std::vector<Task> &tasks);
+unsigned greedy2_validate(std::vector<Task> &tasks, unsigned limit);
 
 void printTasks(std::vector<Task> &tasks, unsigned m);
 #endif
