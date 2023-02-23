@@ -191,7 +191,6 @@ void printTasks(vector<Task> &tasks, unsigned m) {
         count_tasks[i]++;
       }
     }
-    std::cout << "Tarefas executadas na máquina " << i << ": " << count_tasks[i]
-              << std::endl;
+    std::cout << "Total = " << count_tasks[i] << std::endl;
   }
 }
