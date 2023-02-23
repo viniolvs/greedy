@@ -31,7 +31,6 @@ int main(int argc, char *argv[]) {
 
   start = clock();
   if (argc == 3 || argc == 4) {
-    mergeSortTasks(tasks, 0, tasks.size() - 1);
     if (mode == "1") {
       if (validate == "v")
         m = greedy_validate(tasks); // função que valida a solução

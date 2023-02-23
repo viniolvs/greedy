@@ -17,16 +17,19 @@ static int seekIdleMachine(vector<Task> &running, int time) {
 
 // Solução gulosa 1
 unsigned greedy(std::vector<Task> &tasks) {
+  // ordena as tarefas por tempo de início
+  mergeSortTasks(tasks, 0, tasks.size() - 1);
   // vetor com as tarefas em execução
   vector<Task> running;
   // número de máquinas
   unsigned m = 0;
+  int idle = -1;
   int time = 0;
   for (unsigned long i = 0; i < tasks.size(); i++) {
     // tempo atual = início da tarefa atual
     time = tasks[i].start;
     // procura uma tarefa que já terminou
-    int idle = seekIdleMachine(running, time);
+    idle = seekIdleMachine(running, time);
     // se existir uma tarefa que já terminou, a tarefa atual é executada nessa
     if (idle != -1) {
       running[static_cast<unsigned long>(idle)] = tasks[i];
@@ -42,16 +45,19 @@ unsigned greedy(std::vector<Task> &tasks) {
 
 // modifica o vetor de tarefas para exibir qual máquina executou qual tarefa
 unsigned greedy_validate(std::vector<Task> &tasks) {
+  // ordena as tarefas por tempo de início
+  mergeSortTasks(tasks, 0, tasks.size() - 1);
   // vetor com as tarefas em execução
   vector<Task> running;
   // número de máquinas
   unsigned m = 0;
+  int idle = -1;
   int time = 0;
   for (unsigned long i = 0; i < tasks.size(); i++) {
     // tempo atual = início da tarefa atual
     time = tasks[i].start;
     // procura uma tarefa que já terminou
-    int idle = seekIdleMachine(running, time);
+    idle = seekIdleMachine(running, time);
     // se existir uma tarefa que já terminou, a tarefa atual é executada nessa
     if (idle != -1) {
       tasks[i].machine = idle;
@@ -89,7 +95,8 @@ static int seekBestTask(vector<Task> &tasks, int end) {
 // Solução gulosa 2
 // limit define o número máximo de tarefas que uma máquina pode executar
 unsigned greedy2(std::vector<Task> &tasks, unsigned limit) {
-  // vetor auxiliar para exibir qual máquina executou qual tarefa
+  // ordena as tarefas por tempo de início
+  mergeSortTasks(tasks, 0, tasks.size() - 1);
   int best = -1;
   unsigned i = 0;
   for (i = 0; tasks.size() > 0; i++) {
@@ -124,6 +131,8 @@ unsigned greedy2(std::vector<Task> &tasks, unsigned limit) {
 
 // modifica o vetor de tarefas para exibir qual máquina executou qual tarefa
 unsigned greedy2_validate(std::vector<Task> &tasks, unsigned limit) {
+  // ordena as tarefas por tempo de início
+  mergeSortTasks(tasks, 0, tasks.size() - 1);
   // vetor auxiliar
   vector<Task> aux;
   copy(tasks.begin(), tasks.end(), back_inserter(aux));
