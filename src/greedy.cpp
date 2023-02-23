@@ -100,7 +100,7 @@ unsigned greedy2(std::vector<Task> &tasks, unsigned limit) {
 
     for (unsigned long j = 1; tasks.size() > 0; j++) {
       // se não existir mais tarefas para a máquina, sai do loop
-      if (j >= (limit - 1) || machine[j - 1].end > tasks.end()->start)
+      if (j >= limit || machine[j - 1].end > tasks.end()->start)
         break;
       // caso a tarefa caiba na máquina e seja a última da lista de tarefas
       else if (tasks.size() == 1) {
@@ -144,7 +144,7 @@ unsigned greedy2_validate(std::vector<Task> &tasks, unsigned limit) {
     for (unsigned long j = 1; aux.size() > 0; j++) {
       // se não existir mais tarefas para a máquina ou se a maquina
       // atingir o limite de tarefas sai do loop
-      if (j >= (limit - 1) || machine[j - 1].end > aux.end()->start)
+      if (j >= limit || machine[j - 1].end > aux.end()->start)
         break;
       // caso a tarefa caiba na máquina e seja a última da lista de tarefas
       else if (aux.size() == 1) {

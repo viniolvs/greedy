@@ -40,7 +40,8 @@ int main(int argc, char *argv[]) {
         cout << m; // saida script
       }
     } else if (mode == "2") {
-      unsigned limit = 4;
+      unsigned limit = 3; // limite definido analisando a execução do algoritmo
+                          // sem este limite
       if (validate == "v")
         m = greedy2_validate(tasks, limit); // função que valida a solução
       else {
